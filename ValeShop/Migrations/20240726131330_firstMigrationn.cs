@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ValeShop.Migrations
 {
     /// <inheritdoc />
-    public partial class firstMigration : Migration
+    public partial class firstMigrationn : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -78,6 +78,7 @@ namespace ValeShop.Migrations
                     Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     CategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    ImagePath = table.Column<string>(type: "longtext", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },

@@ -27,17 +27,16 @@ namespace ValeShop.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ProductViewModel productViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+           // if (!ModelState.IsValid)
+         //   {
+          //      return BadRequest(ModelState);
+          //  }
 
             var valid = await _repo.CheckCategory(productViewModel.CategoryId);
             if (!valid)
             {
                 return BadRequest("Category does not exist");
             }
-
             string imageUrl = null;
             if (productViewModel.ImageFile != null)
             {
@@ -53,7 +52,6 @@ namespace ValeShop.Controllers
                     imageUrl = uploadResult.SecureUrl.ToString();
                 }
             }
-
             var product = await _repo.CreateProduct(productViewModel, imageUrl);
             TempData["SuccessMessage"] = "Product successfully registered";
             return RedirectToAction(nameof(Success));

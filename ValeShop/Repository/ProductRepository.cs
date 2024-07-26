@@ -36,9 +36,6 @@ namespace ValeShop.Repository
 
             return productModel;
         }
-
-      
-
         public Task<Product?> DeleteProduct(Guid id)
         {
             throw new NotImplementedException();
@@ -58,7 +55,6 @@ namespace ValeShop.Repository
         {
             throw new NotImplementedException();
         }
-
-        // Other methods...
+       // Other methods...
     }
 }

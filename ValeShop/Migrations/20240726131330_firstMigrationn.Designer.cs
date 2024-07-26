@@ -11,8 +11,8 @@ using ValeShop.Data;
 namespace ValeShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240724112920_firstMigration")]
-    partial class firstMigration
+    [Migration("20240726131330_firstMigrationn")]
+    partial class firstMigrationn
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -225,6 +225,9 @@ namespace ValeShop.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("datetime(6)");
