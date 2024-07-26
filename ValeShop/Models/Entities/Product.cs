@@ -5,7 +5,7 @@ namespace ValeShop.Models.Entities
 {
     public class Product
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [StringLength(30)]
         public string? Name { get; set; }
         [StringLength(100)]
@@ -13,9 +13,10 @@ namespace ValeShop.Models.Entities
         [Column(TypeName = "decimal(10,2)")]
         public decimal Price { get; set; }
         public bool Status { get; set; }
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }
+        public string? ImagePath { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime ModifiedAt { get; set; } = DateTime.Now;
     }

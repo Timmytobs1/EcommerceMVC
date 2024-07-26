@@ -4,7 +4,11 @@ namespace ValeShop.Controllers
 {
     public class OrderController : Controller
     {
-        public IActionResult Index()
+        public IActionResult CheckOut()
+        {
+            return View();
+        }
+        public IActionResult CustomeMyOrder()
         {
             return View();
         }

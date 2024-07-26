@@ -5,7 +5,7 @@ namespace ValeShop.Models.Entities
 {
     public class Reviews
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [StringLength(30)]
         public string Name { get; set; } = string.Empty;
         [StringLength(150)]
@@ -14,7 +14,7 @@ namespace ValeShop.Models.Entities
         [StringLength(100)]
         public string Email { get; set; } = string.Empty;
         public int Rating { get; set; }
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
         [ForeignKey("ProductId")]
         public Product? Product { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;

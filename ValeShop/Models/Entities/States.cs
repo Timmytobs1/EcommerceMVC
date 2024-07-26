@@ -4,10 +4,10 @@ namespace ValeShop.Models.Entities
 {
     public class States
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;    
-        public int Zip { get; set; }
-        public int CountryId { get; set; }
+        public string Zip { get; set; }
+        public Guid CountryId { get; set; }
         [ForeignKey("CountryId")]
         public Country? Country { get; set; }
     }

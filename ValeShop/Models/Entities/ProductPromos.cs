@@ -4,12 +4,12 @@ namespace ValeShop.Models.Entities
 {
     public class ProductPromos
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
         [ForeignKey("ProductId")]
         public Product? Product { get; set; }
-        public int PromoId { get; set; }
+        public Guid PromoId { get; set; }
         [ForeignKey("PromoId")]
         public Promos? Promos { get; set; }
 

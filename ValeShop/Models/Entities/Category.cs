@@ -5,11 +5,11 @@ namespace ValeShop.Models.Entities
 {
     public class Category
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [StringLength(30)]
         public string Name { get; set; } = string.Empty;
         public int SubCategory { get; set; } = 0;
-        public int? ParentId { get; set; }
+        public Guid? ParentId { get; set; }
         public bool Status { get; set; } = false;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime LastUpdatedAt { get; set; } = DateTime.Now;
