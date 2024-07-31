@@ -8,7 +8,7 @@ namespace ValeShop.Controllers
         {
             return View();
         }
-        public IActionResult CustomeMyOrder()
+        public IActionResult CustomMyOrder()
         {
             return View();
         }

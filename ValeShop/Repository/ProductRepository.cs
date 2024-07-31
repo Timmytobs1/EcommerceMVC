@@ -14,12 +14,10 @@ namespace ValeShop.Repository
         {
             _context = context;
         }
-
         public Task<bool> CheckCategory(Guid categoryId)
         {
             return _context.Categories.AnyAsync(x => x.Id == categoryId);
         }
-
         public async Task<Product> CreateProduct(ProductViewModel productViewModel, string imageUrl)
         {
             var productModel = new Product

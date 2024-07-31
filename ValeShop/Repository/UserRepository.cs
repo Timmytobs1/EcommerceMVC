@@ -65,15 +65,13 @@ namespace ValeShop.Repository
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
             if (user == null)
             {
-                return null;
+                return null; 
             }
 
             user.FirstName = userViewModel.FirstName;
             user.LastName = userViewModel.LastName;
             user.Email = userViewModel.Email;
             user.UserName = userViewModel.UserName;
-     
-
             await _context.SaveChangesAsync();
             return user;
         }

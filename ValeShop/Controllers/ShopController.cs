@@ -1,7 +1,9 @@
 ﻿using CloudinaryDotNet;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ValeShop.Data;
 using ValeShop.Interface;
+using ValeShop.Models;
 
 namespace ValeShop.Controllers
 {
@@ -16,6 +18,10 @@ namespace ValeShop.Controllers
         }
         public IActionResult Shop()
         {
+            if (HttpContext.Session.GetString("sessionId") == null)
+            {
+                 return RedirectToAction("Login", "User");
+            }
             var products = _context.Products.ToList();
             return View(products);
         }
@@ -23,9 +29,24 @@ namespace ValeShop.Controllers
         {
             return View();
         }
-        public IActionResult ShoppingCart()
+        public async Task <IActionResult> ShoppingCart()
         {
-            return View();
+            var sessionId = HttpContext.Session.GetString("sessionId");
+            var cartItems = await _context.Carts
+                .Include(c => c.Product)
+                .Where(c => c.SessionId == sessionId)
+                .Select(c => new CartViewModel
+                {
+                    Name = c.Product.Name ?? "",
+                    ImageUrl = c.Product.ImagePath ?? "",
+                    Quantity = c.Quantity,
+                    Price = c.Product.Price ,
+                    Total = c.Product.Price * c.Quantity
+                }).ToListAsync();
+
+            return View(cartItems);
         }
+
+     
     }
 }

@@ -1,4 +1,5 @@
-﻿using BCrypt.Net;
+﻿using System.ComponentModel;
+using BCrypt.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
@@ -72,19 +73,34 @@ namespace ValeShop.Controllers
         {
             var templogin = _context.Users.FirstOrDefault(x => x.Email == login.Email || x.UserName == x.UserName);
 
-            if(BCrypt.Net.BCrypt.Verify(login.Password, templogin.Password)){
-                return RedirectToAction("Index", "Home");
-            }
             if (templogin == null)
             {
                 TempData["ErrorMessage"] = "Invalid login details. Please try again.";
                 return View("Login");
             }
+            if(BCrypt.Net.BCrypt.Verify(login.Password, templogin.Password)){
+                HttpContext.Session.SetString("sessionId", Guid.NewGuid().ToString());
+                
+                HttpContext.Session.SetString("userId", templogin.Id.ToString());
+                return RedirectToAction("Index", "Home");
+            }
             TempData["ErrorMessage"] = "Invalid login details. Please try again.";
 
             return View("Login");
 
-
         }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            if (HttpContext.Session.GetString("sessionId") != null)
+            {
+                 HttpContext.Session.Clear();
+             
+            }
+            return RedirectToAction("Login", "User");
+        }
+
+      
     }
 }

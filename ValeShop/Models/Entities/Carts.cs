@@ -6,6 +6,7 @@ namespace ValeShop.Models.Entities
     {
         public Guid Id { get; set; }
         public string SessionId { get; set; }
+        public int Quantity { get; set; }
         public Guid UserId { get; set; }
         [ForeignKey("UserId")]
         public User? User { get; set; }
