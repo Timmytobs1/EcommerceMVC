@@ -3,6 +3,7 @@ using ValeShop.Data;
 using ValeShop.Models.Entities;
 using ValeShop.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ValeShop.Controllers
 {
@@ -37,7 +38,7 @@ namespace ValeShop.Controllers
                 cartItem.Quantity++;
             }
             else
-            {
+            {    
                 cartItem = new Carts
                 {
                     Id = Guid.NewGuid(),
@@ -54,7 +55,7 @@ namespace ValeShop.Controllers
             await _context.SaveChangesAsync();
             // return RedirectToAction(nameof(Cart));
             return RedirectToAction("Shop", "Shop");
-          
+               
         }
 
         // Display cart contents
@@ -72,6 +73,7 @@ namespace ValeShop.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateCart(Guid cartItemId, int quantity)
         {
+           
             var cartItem = await _context.Carts.FindAsync(cartItemId);
             if (cartItem == null)
             {
@@ -79,27 +81,27 @@ namespace ValeShop.Controllers
             }
 
             cartItem.Quantity = quantity;
-            _context.Carts.Update(cartItem);
+            Console.WriteLine(quantity);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Cart));
+            return RedirectToAction("ShoppingCart", "Shop");
         }
 
-        // Remove item from cart
-        [HttpPost]
-        public async Task<IActionResult> RemoveFromCart(Guid cartItemId)
-        {
-            var cartItem = await _context.Carts.FindAsync(cartItemId);
-            if (cartItem == null)
+        //  Romove item from cart
+          [HttpPost]
+           public async Task<IActionResult> RemoveFromCart(Guid cartItemId)
+          {
+           var cartItem = await _context.Carts.FindAsync(cartItemId);
+          if (cartItem == null)
             {
-                return NotFound();
+             return NotFound();
             }
 
-            _context.Carts.Remove(cartItem);
-            await _context.SaveChangesAsync();
+           _context.Carts.Remove(cartItem);
+           await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Cart));
-        }
+            return RedirectToAction("ShoppingCart", "Shop");
+         }
 
         // Helper method to get user ID
         private Guid GetUserId()
@@ -107,9 +109,6 @@ namespace ValeShop.Controllers
             // Implement logic to get the user's ID, for example, from the user claims or authentication service
             return Guid.NewGuid(); // Replace with actual user ID retrieval
         }
-
-
-
         public IActionResult Index()
         {
             return View();

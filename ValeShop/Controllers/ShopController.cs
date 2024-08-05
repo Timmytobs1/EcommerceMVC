@@ -37,6 +37,7 @@ namespace ValeShop.Controllers
                 .Where(c => c.SessionId == sessionId)
                 .Select(c => new CartViewModel
                 {
+                    Id = c.Id,
                     Name = c.Product.Name ?? "",
                     ImageUrl = c.Product.ImagePath ?? "",
                     Quantity = c.Quantity,
@@ -45,8 +46,6 @@ namespace ValeShop.Controllers
                 }).ToListAsync();
 
             return View(cartItems);
-        }
-
-     
+        }   
     }
 }

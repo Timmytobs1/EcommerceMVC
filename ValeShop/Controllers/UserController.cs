@@ -18,13 +18,15 @@ namespace ValeShop.Controllers
         {
             _context = context;
             repo = repository;
-
-        }
-   
+        } 
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            if (HttpContext.Session.GetString("sessionId") != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();        
         }
         [HttpGet]
         public IActionResult Register()
@@ -71,14 +73,18 @@ namespace ValeShop.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel login)
         {
-            var templogin = _context.Users.FirstOrDefault(x => x.Email == login.Email || x.UserName == x.UserName);
+            if (HttpContext.Session.GetString("sessionId") != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var templogin = _context.Users.FirstOrDefault(x => x.Email == login.Email);
 
             if (templogin == null)
             {
                 TempData["ErrorMessage"] = "Invalid login details. Please try again.";
                 return View("Login");
             }
-            if(BCrypt.Net.BCrypt.Verify(login.Password, templogin.Password)){
+            if(templogin != null && BCrypt.Net.BCrypt.Verify(login.Password, templogin.Password)){
                 HttpContext.Session.SetString("sessionId", Guid.NewGuid().ToString());
                 
                 HttpContext.Session.SetString("userId", templogin.Id.ToString());

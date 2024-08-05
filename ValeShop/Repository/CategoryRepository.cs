@@ -25,8 +25,6 @@ namespace ValeShop.Repository
             await _context.SaveChangesAsync();
             return category;
         }
-
-
         public async Task<Category?> DeleteCategory(Guid id)
         {
             var category = await _context.Categories.FindAsync(id);
@@ -39,18 +37,15 @@ namespace ValeShop.Repository
 
             return category;
         }
-
         public async Task<List<Category>> GetAllCategoriesAsync()
         {
             var category = await _context.Categories.ToListAsync();
             return category;
         }
-
         public Task<Category?> GetCategoryByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }
-
         public async Task<Category?> UpdateCategoryAsync(Guid id, CategoryViewModel categoryViewModel)
         {
             var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
@@ -59,8 +54,6 @@ namespace ValeShop.Repository
                 return null;
             }
             category.Name = categoryViewModel.Name;
-
-
             await _context.SaveChangesAsync();
             return category;
         }

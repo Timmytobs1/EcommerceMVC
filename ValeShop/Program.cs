@@ -29,7 +29,6 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -53,11 +52,9 @@ app.UseStaticFiles();
 // Use session middleware
 app.UseSession();
 
+app.UseRouting();     
 
-
-app.UseRouting();
-
-app.UseAuthorization();
+app.UseAuthorization();  
 
 app.MapControllerRoute(
     name: "default",

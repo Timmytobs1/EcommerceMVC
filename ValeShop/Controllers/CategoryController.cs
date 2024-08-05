@@ -26,14 +26,10 @@ namespace ValeShop.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-
-                // Assuming _categoryRepository.CreateCategoryAsync properly saves the category and returns the saved category
                 var category = await _categoryRepository.CreateCategoryAsync(categoryViewModel);
 
                 TempData["SuccessMessage"] = "Category successfully registered";
-                return RedirectToAction(nameof(Success));
-            
-            
+                return RedirectToAction(nameof(Success));      
         }
 
         [HttpGet]
