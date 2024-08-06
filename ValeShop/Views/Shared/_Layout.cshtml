@@ -216,7 +216,8 @@
                                     <!-- Begin Header Mini Cart Area -->
                      <!---->                  <li class="hm-minicart">
                                           <div class="hm-minicart-trigger">
-                                            <span class="item-icon"></span>
+                                            @await Component.InvokeAsync("MiniCart")
+                                            <!--          <span class="item-icon"></span>
                                             <span class="item-text">
                                                 £80.00
                                                 <span class="cart-item-count">2</span>
@@ -247,8 +248,8 @@
                                                     </div>
                                                     <button class="close" title="Remove">
                                                         <i class="fa fa-close"></i>
-                                                    </button>
-                                                </li>
+                                                        </button> -->
+                                            <!--     </li>
                                             </ul>
                                             <p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
                                             <div class="minicart-button">
@@ -260,12 +261,12 @@
                                                 </a>
                                             </div>
                                         </div>
-                                    </li>
-                                    <!-- Header Mini Cart Area End Here -->
+                                            </li> -->
+                                            <!-- Header Mini Cart Area End Here -->
                                 </ul>
                             </div>
                             <!-- Header Middle Right Area End Here -->
-                        </div>
+                        </div> 
                         <!-- Header Middle Right Area End Here -->
                     </div>
                 </div>

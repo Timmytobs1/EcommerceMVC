@@ -58,6 +58,8 @@ namespace ValeShop.Controllers
                
         }
 
+   
+
         // Display cart contents
         public IActionResult Cart()
         {
