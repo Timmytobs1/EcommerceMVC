@@ -22,7 +22,7 @@ namespace ValeShop.Controllers
             {
                  return RedirectToAction("Login", "User");
             }
-            var products = _context.Products.ToList();
+            var products = _context.Products.Include(x => x.Category).ToList();
             return View(products);
         }
         public IActionResult SingleProduct()
