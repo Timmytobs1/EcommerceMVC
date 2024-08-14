@@ -82,8 +82,8 @@
                                         <option value="nig">Nigeria</option>
                                         <option value="ghana">Ghana</option>
                                     </select> *@
-                                </div>
-                            </div>
+                                </div> 
+                            </div>  
                 <!--            <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label>First Name <span class="required">*</span></label>
@@ -95,12 +95,12 @@
                                     <label>Last Name <span class="required">*</span></label>
                                     <input placeholder="" type="text">
                                 </div>
-                                        </div>  -->
+                                        </div>  -->                              
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
                                     <label>CompanyName</label>
                                     <input asp-for="CompanyName" placeholder="" type="text">
-                                </div>
+                                </div>   
                             </div>
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
@@ -140,9 +140,24 @@
                          
                             <div class="col-md-6">
                             <div class="order-button-payment">
-                                <button>Confirm Order</button>
+                          @*       <style>
+                                        #click:hover{
+                                            background-color: #ffc107;
+                                        }
+                                </style> *@
+                                <button  style="padding: 15px 40px; background-color:black; color:white;">Confirm Order</button>
                                 </div>
                             </div>
+                          @*       <div class="order-button-payment">
+                                    <a asp-action="BillingDetails" asp-controller="Order" class="li-button li-button-fullwidth li-button-dark">
+                                        <span>Confirm Order</span>
+                                    </a>
+                                </div> *@
+                            @*     <div class="order-button-payment">
+                                    <a class="li-button li-button-fullwidth li-button-dark">
+                                        <span>Confirm Order</span>
+                                    </a>
+                                </div> *@
 
                       <!--     <div class="col-md-12">
                                 <div class="checkout-form-list create-acc">

@@ -63,7 +63,7 @@ namespace ValeShop.Controllers
             };
             _context.BillingDetails.Add(billingmodel);
             _context.SaveChanges();
-            return Ok("Successful");
+            return View("Success");
         }
 
 
