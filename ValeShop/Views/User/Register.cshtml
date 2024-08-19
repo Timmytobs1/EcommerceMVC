@@ -12,26 +12,32 @@
                             <div class="col-md-6 col-12 mb-20">
                                 <label>First Name</label>
                                 <input asp-for="FirstName" class="mb-0" type="text" placeholder="First Name">
+                                <span asp-validation-for="FirstName"></span>
                             </div>
                             <div class="col-md-6 col-12 mb-20">
                                 <label>Last Name</label>
                                 <input asp-for="LastName" class="mb-0" type="text" placeholder="Last Name">
+                                <span asp-validation-for="LastName"></span>
                             </div>
                             <div class="col-md-6 col-12 mb-20">
                                 <label>UserName</label>
                                 <input asp-for="UserName" class="mb-0" type="text" placeholder="UserName">
+                                <span asp-validation-for="UserName"></span>
                             </div>
                             <div class="col-md-12 mb-20">
                                 <label>Email*</label>
                                 <input asp-for="Email" class="mb-0" type="email" placeholder="Email">
+                                <span asp-validation-for="Email"></span>
                             </div>
                             <div class="col-md-6 mb-20">
                                 <label>Password</label>
                                 <input asp-for="Password" class="mb-0" type="password" placeholder="Password">
+                                <span asp-validation-for="Password"></span>
                             </div>
                             <div class="col-md-6 mb-20">
                                 <label>ConfirmPassword</label>
                                 <input asp-for="ConfirmPassword" class="mb-0" type="password" placeholder="ConfirmPassword">
+                                <span asp-validation-for="ConfirmPassword"></span>
                             </div>
                             <div class="col-12">
                                 <button class="register-button mt-0">Register</button>

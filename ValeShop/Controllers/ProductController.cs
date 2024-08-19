@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using ValeShop.Interface;
 using ValeShop.Models;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using ValeShop.Data;
 
 namespace ValeShop.Controllers
 {
@@ -11,11 +13,13 @@ namespace ValeShop.Controllers
     {
         private readonly IProductRepository _repo;
         private readonly Cloudinary _cloudinary;
+        private readonly ApplicationDbContext _context;
 
-        public ProductController(IProductRepository productRepository, Cloudinary cloudinary)
+        public ProductController(IProductRepository productRepository, Cloudinary cloudinary, ApplicationDbContext context)
         {
             _repo = productRepository;
             _cloudinary = cloudinary;
+            _context = context;
         }
 
         [HttpGet]
@@ -61,6 +65,19 @@ namespace ValeShop.Controllers
         public IActionResult Success()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult SingleProduct(Guid Id)
+        {
+            var singleProduct = _context.Products.FirstOrDefault(x => x.Id == Id);
+            if (singleProduct == null)
+            {
+                return RedirectToAction("Shop", "Shop");
+            }
+            var image = singleProduct.ImagePath;
+            ViewBag.ImageUrl = image;
+            return View(singleProduct);
         }
     }
 }

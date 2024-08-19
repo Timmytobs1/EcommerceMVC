@@ -1,4 +1,5 @@
-﻿<div class="breadcrumb-area">
+﻿@model ValeShop.Models.Entities.Product
+<div class="breadcrumb-area">
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
@@ -19,34 +20,10 @@
                     <div class="product-details-images slider-navigation-1">
                         <div class="lg-image">
                             <a class="popup-img venobox vbox-item" href="~/images/product/large-size/1.jpg" data-gall="myGallery">
-                                <img src="images/product/large-size/1.jpg" alt="product image">
+                                <img src="@Model.ImagePath" alt="product image">
                             </a>
                         </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="~/images/product/large-size/2.jpg" data-gall="myGallery">
-                                <img src="images/product/large-size/2.jpg" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="~/images/product/large-size/3.jpg" data-gall="myGallery">
-                                <img src="images/product/large-size/3.jpg" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="~/images/product/large-size/4.jpg" data-gall="myGallery">
-                                <img src="images/product/large-size/4.jpg" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="~/images/product/large-size/5.jpg" data-gall="myGallery">
-                                <img src="images/product/large-size/5.jpg" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="~/images/product/large-size/6.jpg" data-gall="myGallery">
-                                <img src="images/product/large-size/6.jpg" alt="product image">
-                            </a>
-                        </div>
+                        
                     </div>
                     <div class="product-details-thumbs slider-thumbs-1">
                         <div class="sm-image"><img src="~/images/product/small-size/1.jpg" alt="product image thumb"></div>
@@ -63,8 +40,8 @@
             <div class="col-lg-7 col-md-6">
                 <div class="product-details-view-content pt-60">
                     <div class="product-info">
-                        <h2>Today is a good day Framed poster</h2>
-                        <span class="product-details-ref">Reference: demo_15</span>
+                        <h2>@Model.Name</h2>
+                      
                         <div class="rating-box pt-20">
                             <ul class="rating rating-with-review-item">
                                 <li><i class="fa fa-star-o"></i></li>
@@ -97,16 +74,10 @@
                             </div>
                         </div>
                         <div class="single-add-to-cart">
-                            <form action="#" class="cart-quantity">
-                                <div class="quantity">
-                                    <label>Quantity</label>
-                                    <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box" value="1" type="text">
-                                        <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                        <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                    </div>
-                                </div>
-                                <button class="add-to-cart" type="submit">Add to cart</button>
+                            <form method="POST" asp-controller="Cart" asp-action="AddToCart">
+                                <input type="hidden" name="id" value="@Model.Id" />
+                                <button class="form-control">Add To Cart</button>
+
                             </form>
                         </div>
                         <div class="product-additional-info pt-25">
@@ -220,9 +191,9 @@
                                                 <div class="li-review-product">
                                                     <img src="~/images/product/large-size/3.jpg" alt="Li's Product">
                                                     <div class="li-review-product-desc">
-                                                        <p class="li-product-name">Today is a good day Framed poster</p>
+                                                        <p class="li-product-name">@Model.Name</p>
                                                         <p>
-                                                            <span>Beach Camera Exclusive Bundle - Includes Two Samsung Radiant 360 R3 Wi-Fi Bluetooth Speakers. Fill The Entire Room With Exquisite Sound via Ring Radiator Technology. Stream And Control R3 Speakers Wirelessly With Your Smartphone. Sophisticated, Modern Design </span>
+            
                                                         </p>
                                                     </div>
                                                 </div>
@@ -333,7 +304,15 @@
                                     </div>
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
+                                            <li class="add-cart active">
+                                                <form method="POST" asp-controller="Cart" asp-action="AddToCart">
+                                                    <input type="hidden" name="id" value="@Model.Id" />
+                                                    <button class="form-control">Add To Cart</button>
+
+
+
+                                                </form>
+                                            </li>
                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                         </ul>
@@ -376,7 +355,15 @@
                                     </div>
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
+                                            <li class="add-cart active">
+                                                <form method="POST" asp-controller="Cart" asp-action="AddToCart">
+                                                    <input type="hidden" name="id" value="@Model.Id" />
+                                                    <button class="form-control">Add To Cart</button>
+
+
+
+                                                </form>
+                                            </li>
                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                         </ul>
@@ -417,7 +404,15 @@
                                     </div>
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
+                                            <li class="add-cart active">
+                                                <form method="POST" asp-controller="Cart" asp-action="AddToCart">
+                                                    <input type="hidden" name="id" value="@Model.Id" />
+                                                    <button class="form-control">Add To Cart</button>
+
+
+
+                                                </form>
+                                            </li>
                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                         </ul>
@@ -460,7 +455,15 @@
                                     </div>
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
+                                            <li class="add-cart active">
+                                                <form method="POST" asp-controller="Cart" asp-action="AddToCart">
+                                                    <input type="hidden" name="id" value="@Model.Id" />
+                                                    <button class="form-control">Add To Cart</button>
+
+
+
+                                                </form>
+                                            </li>
                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                         </ul>
@@ -501,7 +504,15 @@
                                     </div>
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
+                                            <li class="add-cart active">
+                                                <form method="POST" asp-controller="Cart" asp-action="AddToCart">
+                                                    <input type="hidden" name="id" value="@Model.Id" />
+                                                    <button class="form-control">Add To Cart</button>
+
+
+
+                                                </form>
+                                            </li>
                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                         </ul>
@@ -544,7 +555,15 @@
                                     </div>
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
+                                            <li class="add-cart active">
+                                                <form method="POST" asp-controller="Cart" asp-action="AddToCart">
+                                                    <input type="hidden" name="id" value="@Model.Id" />
+                                                    <button class="form-control">Add To Cart</button>
+
+
+
+                                                </form>
+                                            </li>
                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                         </ul>
@@ -835,8 +854,8 @@
                     <div class="col-lg-7 col-md-6 col-sm-6">
                         <div class="product-details-view-content pt-60">
                             <div class="product-info">
-                                <h2>Today is a good day Framed poster</h2>
-                                <span class="product-details-ref">Reference: demo_15</span>
+                                <h2>@Model.Name</h2>
+                             
                                 <div class="rating-box pt-20">
                                     <ul class="rating rating-with-review-item">
                                         <li><i class="fa fa-star-o"></i></li>
@@ -869,16 +888,9 @@
                                     </div>
                                 </div>
                                 <div class="single-add-to-cart">
-                                    <form action="#" class="cart-quantity">
-                                        <div class="quantity">
-                                            <label>Quantity</label>
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" value="1" type="text">
-                                                <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                                <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                            </div>
-                                        </div>
-                                        <button class="add-to-cart" type="submit">Add to cart</button>
+                                    <form method="POST" asp-controller="Cart" asp-action="AddToCart">
+                                        <input type="hidden" name="id" value="@Model.Id" />
+                                        <button class="form-control">Add To Cart</button>
                                     </form>
                                 </div>
                                 <div class="product-additional-info pt-25">

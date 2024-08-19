@@ -16,7 +16,5 @@ namespace ValeShop.Models.Entities
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public DateTime PaymentDate { get; set; } = DateTime.Now;
         public DateTime DeliveryDate { get; set; } = DateTime.Now;
-
-
     }
 }

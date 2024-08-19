@@ -25,9 +25,17 @@ namespace ValeShop.Controllers
             var products = _context.Products.Include(x => x.Category).ToList();
             return View(products);
         }
-        public IActionResult SingleProduct()
+        [HttpGet]
+        public IActionResult SingleProduct(Guid Id)
         {
-            return View();
+            var singleProduct = _context.Products.FirstOrDefault(x => x.Id == Id);
+            if (singleProduct == null)
+            {
+                return RedirectToAction("Shop", "Shop");
+            }
+            var image = singleProduct.ImagePath;
+            ViewBag.ImageUrl = image;
+            return View(singleProduct);
         }
         public async Task <IActionResult> ShoppingCart()
         {

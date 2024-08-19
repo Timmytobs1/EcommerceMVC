@@ -6,17 +6,21 @@ using Microsoft.EntityFrameworkCore;
 using ValeShop.Data;
 using ValeShop.Interface;
 using ValeShop.Models.Entities;
+using System.Net.Mail;
+using System.Net;
 
 namespace ValeShop.Controllers
 {
     public class OrderController : Controller
     {
         private readonly ApplicationDbContext _context;
-       
-        public  OrderController(ApplicationDbContext context)
+        private readonly IEmailService _emailService;
+
+
+        public  OrderController(ApplicationDbContext context, IEmailService emailService)
         {
             _context = context;
-           
+            _emailService = emailService;
         }
 
         [HttpGet]
@@ -38,21 +42,57 @@ namespace ValeShop.Controllers
 
             return View(cartItems);
         }
+        /*
+                [HttpGet]
+                public IActionResult BillingDetails(BillingDetailsViewModel billingDetailsViewModel)
+                {
+                    return View();
+                }
+                [HttpPost]
+                public IActionResult store(BillingDetailsViewModel billingDetailsViewModel)
+                {
 
+
+                    var billingmodel = new BillingDetails
+                    {
+
+                        UserId = Guid.Parse(HttpContext.Session.GetString("userId")),
+                        CompanyName = billingDetailsViewModel.CompanyName,
+                        City = billingDetailsViewModel.City,
+                        Address = billingDetailsViewModel.Address,
+                        PhoneNumber = billingDetailsViewModel.PhoneNumber,
+                        State = billingDetailsViewModel.State,
+                        Country = billingDetailsViewModel.Country,
+                        IsActive = true
+                    };
+                    _context.BillingDetails.Add(billingmodel);
+                    _context.SaveChanges();
+
+
+                    return View("Success");
+                }*/
         [HttpGet]
         public IActionResult BillingDetails(BillingDetailsViewModel billingDetailsViewModel)
         {
             return View();
         }
         [HttpPost]
-        public IActionResult store(BillingDetailsViewModel billingDetailsViewModel)
+        public async Task<IActionResult> Store(BillingDetailsViewModel billingDetailsViewModel)
         {
+            var userId = Guid.Parse(HttpContext.Session.GetString("userId"));
 
-         
+            // Retrieve user email from the database
+            var user = _context.Users.FirstOrDefault(x => x.Id == userId);
+            if (user == null || string.IsNullOrEmpty(user.Email))
+            {
+                // Handle the case where the user or their email is not found
+                TempData["ErrorMessage"] = "Unable to retrieve user email. Please try again.";
+                return View("Error");
+            }
+
             var billingmodel = new BillingDetails
             {
-
-                UserId =  Guid.Parse(HttpContext.Session.GetString("userId")),
+                UserId = userId,
                 CompanyName = billingDetailsViewModel.CompanyName,
                 City = billingDetailsViewModel.City,
                 Address = billingDetailsViewModel.Address,
@@ -61,11 +101,40 @@ namespace ValeShop.Controllers
                 Country = billingDetailsViewModel.Country,
                 IsActive = true
             };
+
             _context.BillingDetails.Add(billingmodel);
             _context.SaveChanges();
+
+            // Send a confirmation email after saving billing details
+            string subject = "Billing Details Confirmation";
+            string message = $@"
+        <h1>Billing Details Received Successfully</h1>
+        <p>Dear {user.FirstName},</p>
+        <p>Thank you for providing your billing details. Here are the details you entered:</p>
+        <ul>
+            <li><strong>Company Name:</strong> {billingDetailsViewModel.CompanyName}</li>
+            <li><strong>City:</strong> {billingDetailsViewModel.City}</li>
+            <li><strong>Address:</strong> {billingDetailsViewModel.Address}</li>
+            <li><strong>Phone Number:</strong> {billingDetailsViewModel.PhoneNumber}</li>
+            <li><strong>State:</strong> {billingDetailsViewModel.State}</li>
+            <li><strong>Country:</strong> {billingDetailsViewModel.Country}</li>
+            <li><strong>Zip:</strong> {billingDetailsViewModel.Zip}</li>
+        </ul>
+        <p>If you need to make any changes, please visit your account to update your details.</p>
+     
+        <br/>
+        <p>Best regards,</p>
+        <p>The Ecommerce Store Team</p>
+    ";
+
+            await _emailService.SendEmailAsync(user.Email, subject, message);
+
             return View("Success");
         }
 
+
+ 
+ 
 
         public IActionResult CustomMyOrder()
         {
