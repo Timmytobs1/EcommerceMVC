@@ -100,12 +100,14 @@
                                 <div class="checkout-form-list">
                                     <label>CompanyName</label>
                                     <input asp-for="CompanyName" placeholder="" type="text">
+                                    <span asp-validation-for="CompanyName"></span>
                                 </div>   
                             </div>
                             <div class="col-md-12">
                                 <div class="checkout-form-list">
                                     <label>Address <span class="required">*</span></label>
                                     <input asp-for="Address" placeholder="Street address" type="text">
+                                    <span asp-validation-for="Address"></span>
                                 </div>
                             </div>
                   <!--       <div class="col-md-12">
@@ -117,24 +119,28 @@
                                 <div class="checkout-form-list">
                                     <label>City <span class="required">*</span></label>
                                     <input asp-for="City" type="text">
+                                    <span asp-validation-for="City"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label>PhoneNumber  <span class="required">*</span></label>
                                     <input asp-for="PhoneNumber" type="text">
+                                    <span asp-validation-for="PhoneNumber"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label>State<span class="required">*</span></label>
                                     <input asp-for="State" placeholder="" type="text">
+                                    <span asp-validation-for="State"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="checkout-form-list">
                                     <label>Zip <span class="required">*</span></label>
                                     <input asp-for="Zip" placeholder="" type="text">
+                                    <span asp-validation-for="Zip"></span>
                                 </div>
                             </div>
                          

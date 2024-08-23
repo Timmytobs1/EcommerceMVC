@@ -31,10 +31,7 @@ namespace ValeShop.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ProductViewModel productViewModel)
         {
-           // if (!ModelState.IsValid)
-         //   {
-          //      return BadRequest(ModelState);
-          //  }
+        
 
             var valid = await _repo.CheckCategory(productViewModel.CategoryId);
             if (!valid)

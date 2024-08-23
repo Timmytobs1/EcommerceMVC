@@ -5,6 +5,7 @@ namespace ValeShop.Models.Entities
 {
     public class Orders
     {
+
         public Guid Id { get; set; }
         public Guid ProductId { get; set; }
         public Guid UserId { get; set; }
@@ -16,5 +17,8 @@ namespace ValeShop.Models.Entities
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public DateTime PaymentDate { get; set; } = DateTime.Now;
         public DateTime DeliveryDate { get; set; } = DateTime.Now;
+
+        // Add this navigation property
+        public List<OrderDetails> OrderDetails { get; set; } = new List<OrderDetails>();
     }
 }
