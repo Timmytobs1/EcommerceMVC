@@ -11,5 +11,7 @@ namespace ValeShop.Interface
         public Task<Product?> UpdateProduct(Guid id, ProductViewModel productViewModel);
         public Task<Product?> DeleteProduct(Guid id);
         public Task<bool> CheckCategory(Guid categoryId);
+
+        public Task<List<Product>> SearchProductsAsync(string query, Guid? categoryId);
     }
 }

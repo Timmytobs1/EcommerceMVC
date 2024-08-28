@@ -125,7 +125,25 @@
                         <!-- Begin Header Middle Right Area -->
                         <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
                             <!-- Begin Header Middle Searchbox Area -->
-                            <form action="#" class="hm-searchbox">
+                            <form action="@Url.Action("Results", "SearchResults")" method="get" class="hm-searchbox">
+                                <select name="category" class="nice-select select-search-category">
+                                    <option value="">All Categories</option>
+                                    @if (ViewBag.Categories != null)
+                                    {
+                                        @foreach (var category in ViewBag.Categories)
+                                        {
+                                            <option value="@category.Id">@category.Name</option>
+                                        }
+                                    }
+
+                                </select>
+                                <input type="text" name="query" placeholder="Enter your search key ..."
+                                       value="@ViewBag.SearchQuery">
+                                <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+
+
+                          @*   <form action="#" class="hm-searchbox">
                                 <select class="nice-select select-search-category">
                                     <option value="0">All</option>
                                     <option value="10">Laptops</option>
@@ -200,7 +218,7 @@
                                 </select>
                                 <input type="text" placeholder="Enter your search key ...">
                                 <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
-                            </form>
+                            </form> *@
                             <!-- Header Middle Searchbox Area End Here -->
                             <!-- Begin Header Middle Right Area -->
                             <div class="header-middle-right">
@@ -400,7 +418,7 @@
     <!-- Jquery-ui -->
     <script src="~/js/jquery-ui.min.js"></script>
     <!-- Venobox -->
-    <script src="~/js/venobox.min.js"></script>
+
     <!-- Nice Select js -->
     <script src="~/js/jquery.nice-select.min.js"></script>
     <!-- ScrollUp js -->
@@ -409,7 +427,7 @@
     <script src="~/js/main.js"></script>
 
  
-    }
+    
 </body>
 
 <!-- index30:23-->

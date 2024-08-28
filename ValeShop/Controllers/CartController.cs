@@ -27,7 +27,15 @@ namespace ValeShop.Controllers
             }
 
             var sessionId = HttpContext.Session.GetString("sessionId");
-            
+
+            if (HttpContext.Session.GetString("sessionId") == null)
+            {
+                TempData["LoginToAddToCart"] = "log into your account to add to cart and process your orders!";
+
+
+                return RedirectToAction("Login", "User");
+            }
+
             var userId = GetUserId(); // Implement this method based on your user authentication setup
 
             var cartItem = await _context.Carts.FirstOrDefaultAsync(x => x.ProductId == id && x.SessionId == sessionId);

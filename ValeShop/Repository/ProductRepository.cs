@@ -49,6 +49,29 @@ namespace ValeShop.Repository
             throw new NotImplementedException();
         }
 
+        public async Task<List<Product>> SearchProductsAsync(string query, Guid? categoryId)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(query))
+                {
+                    return await _context.Products
+                        .Where(p => !categoryId.HasValue || p.CategoryId == categoryId.Value)
+                        .ToListAsync();
+                }
+
+                return await _context.Products
+                    .Where(p => p.Name.Contains(query, StringComparison.OrdinalIgnoreCase) &&
+                                (!categoryId.HasValue || p.CategoryId == categoryId.Value))
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+             //   _logger.LogError(ex, "Failed to search products");
+                throw new Exception("Failed to search products", ex);
+            }
+        }
+
         public Task<Product?> UpdateProduct(Guid id, ProductViewModel productViewModel)
         {
             throw new NotImplementedException();

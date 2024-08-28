@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ValeShop.Data;
 
@@ -10,9 +11,11 @@ using ValeShop.Data;
 namespace ValeShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240823110247_upMigra")]
+    partial class upMigra
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,6 +201,9 @@ namespace ValeShop.Migrations
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("char(36)");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -205,6 +211,8 @@ namespace ValeShop.Migrations
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("UserId");
 
@@ -471,11 +479,19 @@ namespace ValeShop.Migrations
 
             modelBuilder.Entity("ValeShop.Models.Entities.Orders", b =>
                 {
+                    b.HasOne("ValeShop.Models.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ValeShop.Models.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Product");
 
                     b.Navigation("User");
                 });

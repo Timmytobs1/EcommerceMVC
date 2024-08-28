@@ -10,5 +10,6 @@ namespace ValeShop.Interface
         public Task<Category> CreateCategoryAsync(CategoryViewModel categoryViewModel);
         public Task<Category?> UpdateCategoryAsync(Guid id, CategoryViewModel categoryViewModel);
         public Task<Category?> DeleteCategory(Guid id);
+      /*  public Task<List<CategoryViewModel>> ViewCategories();*/
     }
 }

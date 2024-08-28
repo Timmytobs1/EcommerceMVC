@@ -57,5 +57,20 @@ namespace ValeShop.Repository
             await _context.SaveChangesAsync();
             return category;
         }
+
+      /*  public async Task<List<CategoryViewModel>> ViewCategories()
+        {
+            try
+            {
+                var categories = await _context.Categories.ToListAsync();
+                return categories;
+
+             //   return _mapper.Map<List<CategoryViewModel>>(categories);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Failed to get categories", e);
+            }
+        }*/
     }
 }

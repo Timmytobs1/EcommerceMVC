@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using ValeShop.Data;
 using ValeShop.Interface;
 using ValeShop.Models;
+using ValeShop.PaymentServices;
 using ValeShop.Repository;
 
 
@@ -22,12 +23,14 @@ builder.Services.AddSingleton(sp =>
     var settings = sp.GetRequiredService<IOptions<CloudinarySettings>>().Value;
     var account = new Account(settings.CloudName, settings.ApiKey, settings.ApiSecret);
     return new Cloudinary(account);
-});   
+});
 // Add services to the container.
 
-
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("Smtp"));
 builder.Services.AddTransient<IEmailService, EmailService>();
+builder.Services.AddSingleton<PaystackService>();
+
 
 builder.Services.AddControllersWithViews();
 
